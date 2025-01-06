@@ -3,12 +3,12 @@ This is a simple and basic project that allow you to you regex search and match 
 
 ## Current support token:
 - [x] Character
-- [x] . # Any case
-- [x] + # One or more
-- [x] ? # Zero or one 
-- [ ] ^  # Start of string
-- [ ] $  # End of string
-- [ ] \n # Newline
-- [ ] \r # Carriage return
-- [ ] [] # Single Character in brace 
+- [x] . 
+- [x] +
+- [x] ?
+- [x] ^  
+- [x] $  
+- [ ] \n 
+- [ ] \r 
+- [ ] [] 
 
