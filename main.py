@@ -1,3 +1,5 @@
+import sys
+
 class RegexEngine:
     def __init__(self, pattern):
         self.pattern = pattern
@@ -7,7 +9,6 @@ class RegexEngine:
             return self._match_helper(1, 0, text)
         else:
             for i in range(len(text) + 1):
-                print(self._match_helper(0, i, text))
                 if self._match_helper(0, i, text):
                     return True
             return False
@@ -34,9 +35,16 @@ class RegexEngine:
         else:
             return first_match and self._match_helper(pat_idx + 1, txt_idx + 1, text)
 
+if __name__ == "__main__":
+    if len(sys.argv) != 3:
+        print("Usage: python regex_engine.py <pattern> <text>")
+        sys.exit(1)
 
+    pattern = sys.argv[1]
+    text = sys.argv[2]
 
-engine2 = RegexEngine("^abcd.?")
-print(engine2.match("abcd"))   # True
-print(engine2.match("abcde"))  # True
-print(engine2.match("ababc")) # False
+    engine = RegexEngine(pattern)
+    if engine.match(text):
+        print("Match!")
+    else:
+        print("No match.")
