@@ -8,16 +8,19 @@ class RegexEngine:
     def _match_helper(self, pat_idx, txt_idx, text):
         if pat_idx == len(self.pattern):
             return txt_idx == len(text)
-        
-        first_match = (txt_idx < len(text) and 
+
+        first_match = (txt_idx < len(text) and
                        (self.pattern[pat_idx] == text[txt_idx] or self.pattern[pat_idx] == '.'))
-        
+
         if (pat_idx + 1) < len(self.pattern) and self.pattern[pat_idx + 1] == '*':
             return (self._match_helper(pat_idx + 2, txt_idx, text) or
                     (first_match and self._match_helper(pat_idx, txt_idx + 1, text)))
-        
+
         elif (pat_idx + 1) < len(self.pattern) and self.pattern[pat_idx + 1] == '+':
             return first_match and (self._match_helper(pat_idx + 2, txt_idx + 1, text) or
                                     self._match_helper(pat_idx, txt_idx + 1, text))
+        elif (pat_idx + 1) < len(self.pattern) and self.pattern[pat_idx + 1] == '?':
+            return (self._match_helper(pat_idx + 2, txt_idx, text) or
+                    (first_match and self._match_helper(pat_idx + 2, txt_idx + 1, text)))
         else:
             return first_match and self._match_helper(pat_idx + 1, txt_idx + 1, text)
